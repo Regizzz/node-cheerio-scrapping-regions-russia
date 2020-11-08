@@ -8,8 +8,12 @@ async function getRusRegions() {
     const $ = cheerio.load(data);
     const table = $('table.standard:nth-child(4)');
     const regions = [];
-    const rows = table.find('tbody tr');
-    console.log(rows);
+    table.find('tbody tr').each((i, element) => {
+        const $element = $(element);
+        const region = {};
+        region.name = $element.find('td').text().split(' ', 2).slice(1);
+        console.log(region);
+    });
 }
 
 getRusRegions(); 
